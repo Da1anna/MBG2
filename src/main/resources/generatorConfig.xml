@@ -17,6 +17,15 @@
         <!-- 这个插件给生成的Java模型对象增加了equals和hashCode方法 -->
         <!--<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>-->
 
+        <!-- 注释 -->
+        <commentGenerator>
+            <!-- 是否不生成注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 不希望生成的注释中包含时间戳 -->
+            <!--<property name="suppressDate" value="true"/>-->
+            <!-- 添加 db 表中字段的注释，只有suppressAllComments为false时才生效-->
+            <!--<property name="addRemarkComments" value="true"/>-->
+        </commentGenerator>
 
         <!-- jdbc连接 -->
         <jdbcConnection driverClass="${spring.datasource.driverClassName}"
@@ -77,7 +86,11 @@
             <!--<property name="useActualColumnNames" value="false" />-->
         </table>
         <table tableName="student" domainObjectName="Student"> </table>
-        <table tableName="subject" domainObjectName="Subject"> </table>
+        <table tableName="subject" domainObjectName="Subject"
+               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false" selectByExampleQueryId="false">
+        </table>
+
         <table tableName="course" domainObjectName="Course"> </table>
     </context>
 </generatorConfiguration>

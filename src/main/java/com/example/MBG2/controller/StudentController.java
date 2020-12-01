@@ -1,12 +1,12 @@
 package com.example.MBG2.controller;
 
 import com.example.MBG2.entity.Student;
+import com.example.MBG2.entity.StudentExample;
 import com.example.MBG2.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/students")
@@ -19,4 +19,21 @@ public class StudentController {
     public Student getStudentById(@PathVariable("id") Integer id){
         return studentService.selectById(id);
     }
+
+    @PostMapping("")
+    public List<Student> getStudentByAge(@RequestParam("age") short age){
+        StudentExample example = new StudentExample();
+        String first_name = "小%";
+        example.or()
+            .andAgeGreaterThan(age)
+            .andNameLike(first_name);
+
+        return studentService.selectByExample(example);
+    }
+
+    @GetMapping("/sub/{id}")
+    public Student getStudentAndSubjects(@PathVariable("id") Integer id){
+        return studentService.selectStudentAndSubjects(id);
+    }
 }
+
