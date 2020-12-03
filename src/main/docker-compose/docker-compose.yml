@@ -1,0 +1,62 @@
+version : '3'
+services:
+  #服务名
+  mbg2:
+    #给新建的容器命令
+    container_name: mbg2_connected_mysql_c
+    #利用Dockerfile建立镜像
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #映射宿主机端口和容器端口，以便通过宿主机访问容器服务
+    ports:
+      - "8080:8080"
+    #容器内的目录挂载到宿主机目录，以便持久化数据，删除容器，数据仍然存在
+#    volumes:
+#      - .:/vol/development
+    #建立依赖关系，确定容器启动顺序
+    depends_on:
+      - mysql_db
+    #与（同一网络）的某个服务建立连接，以便容器之间的通信
+    #建立连接后，可通过服务名和别名进行连接，可不用ip地址
+    links:
+      # "服务名：别名"  别名可选
+      - "mysql_db:mysql"
+    #
+    restart: always
+    #网络环境
+    networks:
+      - my-network
+    environment:
+      - TZ=Asia/Shanghai
+
+  mysql_db:
+    container_name: mysql_c_for_mbg2
+    image: mysql:5.7
+    ports:
+      - "4306:3306"
+    #暴露端口，暴露的端口只供容器之间使用，外界无法连接
+    expose:
+      - "3306"
+    #
+#    command: [
+#        '--character-set-server=utf8mb4',
+#        '--collation-server=utf8mb4_unicode_ci',
+#        '--default-time-zone=+8:00'
+#    ]
+    #
+    environment:
+      MYSQL_ROOT_PASSWORD: lj000123
+      MYSQL_DATABASE: mgb2
+      MYSQL_USER: mgb2_user
+      MYSQL_PASSWORD: lj000123
+#    restart: always
+    networks:
+      - my-network
+    #挂载到宿主机目录
+    volumes:
+      - "/home/daiana/docker-compose/mysql/mysql/data:/var/lib/mysql"
+#网络环境，可以设置多个网络环境，选择让容器位于不同的网络环境
+#同一网络环境下，可以通过服务名互相连接
+networks:
+  my-network:

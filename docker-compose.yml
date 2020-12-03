@@ -1,0 +1,15 @@
+# yaml 配置
+version: "3"
+services:
+  mbg2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docker-compose_text_1.0
+    ports:
+      - "8080:8080"
+    network_mode: "host"
+
+
+
+
