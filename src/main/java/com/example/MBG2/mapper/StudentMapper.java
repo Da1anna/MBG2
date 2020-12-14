@@ -34,6 +34,6 @@ public interface StudentMapper {
 
     Student selectStudentAndSubjects(Integer id);
 
-
+    List<Student> selectAll();
 
 }

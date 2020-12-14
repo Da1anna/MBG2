@@ -31,7 +31,7 @@ services:
       - TZ=Asia/Shanghai
 
   mysql_db:
-    container_name: mysql_c_for_mbg2
+    container_name: mysql_c_for_mbg2_text
     image: mysql:5.7
     ports:
       - "4306:3306"
@@ -54,8 +54,8 @@ services:
     networks:
       - my-network
     #挂载到宿主机目录
-    volumes:
-      - "/home/daiana/docker-compose/mysql/mysql/data:/var/lib/mysql"
+#    volumes:
+#      - "/home/daiana/docker-compose/mysql/mysql/data:/var/lib/mysql"
 #网络环境，可以设置多个网络环境，选择让容器位于不同的网络环境
 #同一网络环境下，可以通过服务名互相连接
 networks:

@@ -20,6 +20,7 @@ public class StudentController {
         return studentService.selectById(id);
     }
 
+    //查询“姓小的+大于某个年龄”的学生
     @PostMapping("")
     public List<Student> getStudentByAge(@RequestParam("age") short age){
         StudentExample example = new StudentExample();
@@ -35,5 +36,28 @@ public class StudentController {
     public Student getStudentAndSubjects(@PathVariable("id") Integer id){
         return studentService.selectStudentAndSubjects(id);
     }
+
+    @PostMapping("/add")
+    public int insertStudent(@RequestBody Student record) {
+        return studentService.insert(record);
+    }
+
+    @PostMapping("/del")
+    public int deleteStudentsByName(@RequestParam("name") String name) {
+        StudentExample example = new StudentExample();
+        example.or().andNameEqualTo(name);
+        return studentService.deleteByExample(example);
+    }
+
+    @PostMapping("/update")
+    public int updateByPrimaryKeySelective(@RequestBody Student record) {
+        return studentService.updateByPrimaryKeySelective(record);
+    }
+
+    @GetMapping("/all")
+    public List<Student> selectAll(){
+        return studentService.selectAll();
+    }
+
 }
 
