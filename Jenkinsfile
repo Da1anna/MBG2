@@ -22,5 +22,6 @@ pipeline {
         sh 'docker run --rm -p 8090:8080 --name=mbg2_jenkins -d mbg2:jenkins'
       }
     }
+
   }
 }
