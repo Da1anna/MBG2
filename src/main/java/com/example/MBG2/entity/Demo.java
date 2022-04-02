@@ -7,6 +7,8 @@ package com.example.MBG2.entity;
  * @Date 2022/4/2 15:17
  */
 public class Demo {
-    
+
     private int number;
+
+    private String name;
 }
