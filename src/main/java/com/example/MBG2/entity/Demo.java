@@ -11,4 +11,9 @@ public class Demo {
     private int number;
 
     private String name;
+
+    private String age;
+
+    private String address;
+
 }
