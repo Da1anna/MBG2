@@ -6,12 +6,11 @@ import lombok.Data;
  * 类功能描述
  *
  * @Author 叫我黛安娜
- * @Date 2022/7/29 11:18
+ * @Date 2022/8/9 15:35
  */
 @Data
-public class Test04 {
-    private String id;
+public class test01 {
     private String name;
-    private String age;
-    private String paper;
+    private int age;
+    private String sex;
 }
